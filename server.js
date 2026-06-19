@@ -1,3 +1,14 @@
+import { webcrypto } from 'node:crypto';
+
+// Baileys' newer internals call the Web Crypto API (globalThis.crypto)
+// directly. That global is only built into Node by default from v20+; on
+// Node 18 it's missing unless polyfilled, which is what caused the
+// "crypto is not defined" crash. This makes it available everywhere,
+// including older Node runtimes some hosts still default to.
+if (!globalThis.crypto) {
+  globalThis.crypto = webcrypto;
+}
+
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
