@@ -1,0 +1,19 @@
+{
+  "name": "subhan-md-pairing",
+  "version": "1.0.0",
+  "description": "WhatsApp pairing code generator for SUBHAN MD sessions",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.9",
+    "@hapi/boom": "^10.0.1",
+    "express": "^4.19.2",
+    "pino": "^9.3.2"
+  }
+}
