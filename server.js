@@ -4,13 +4,21 @@ import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
 import pino from 'pino';
-import makeWASocket, {
+import baileysPkg from '@whiskeysockets/baileys';
+
+// @whiskeysockets/baileys is a CommonJS package. Some of its exports (like
+// `proto`) are attached via a barrel `export *` re-export, which Node's
+// static CJS->ESM analyzer can't always see — causing
+// "Named export 'proto' not found" crashes. Importing the whole module as
+// default and destructuring at runtime sidesteps that entirely.
+const {
+  default: makeWASocket,
   useMultiFileAuthState,
   Browsers,
   delay,
   generateWAMessageFromContent,
   proto,
-} from '@whiskeysockets/baileys';
+} = baileysPkg;
 
 const SESSION_PREFIX = 'SUBHAN-MD~';
 
