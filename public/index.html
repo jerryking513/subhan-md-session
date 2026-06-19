@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUBHAN MD — Session Pairing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="noise"></div>
+
+<main class="wrap">
+  <header class="head">
+    <div class="brand">
+      <span class="dot"></span>
+      <span class="brand-name">SUBHAN MD</span>
+    </div>
+    <h1>Link a device with a pairing code</h1>
+    <p class="sub">Enter the WhatsApp number you want to run the bot on. We'll generate an 8&#8209;digit code — enter it under <strong>Linked Devices &rarr; Link with phone number</strong> in WhatsApp.</p>
+  </header>
+
+  <section class="panel" id="panel-input">
+    <label for="number">Phone number, with country code</label>
+    <div class="field">
+      <span class="prefix">+</span>
+      <input id="number" type="tel" inputmode="numeric" placeholder="923001234567" autocomplete="off">
+    </div>
+    <button id="btn-pair" class="btn-primary">
+      <span class="btn-label">Generate pairing code</span>
+      <span class="btn-spinner" hidden></span>
+    </button>
+    <p class="error" id="error-msg" hidden></p>
+  </section>
+
+  <section class="panel hidden" id="panel-code">
+    <div class="status-row">
+      <span class="pulse-dot" id="pulse-dot"></span>
+      <span id="status-text">Waiting for device&hellip;</span>
+    </div>
+
+    <div class="code-box" id="code-box">
+      <span class="code-text" id="code-text">— — — — — — — —</span>
+      <button class="copy-btn" id="copy-code" title="Copy code">Copy</button>
+    </div>
+    <div class="scanline"></div>
+
+    <ol class="steps">
+      <li>Open WhatsApp &rarr; Settings &rarr; Linked devices</li>
+      <li>Tap <strong>Link a device</strong> &rarr; <strong>Link with phone number instead</strong></li>
+      <li>Type the code above before it expires</li>
+    </ol>
+
+    <button id="btn-cancel" class="btn-ghost">Cancel</button>
+  </section>
+
+  <section class="panel hidden" id="panel-success">
+    <div class="status-row success">
+      <span class="pulse-dot connected"></span>
+      <span>Device linked</span>
+    </div>
+    <p class="sub">This is your session string. Save it somewhere safe — it's the only copy. It has also been sent to your own WhatsApp number with a copy button. Paste it into your bot's <code>SESSION_ID</code> environment variable.</p>
+    <textarea id="session-string" readonly></textarea>
+    <div class="actions">
+      <button id="copy-session" class="btn-primary">Copy session string</button>
+      <button id="btn-new" class="btn-ghost">Pair another number</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Session data is held in memory only while you complete pairing, then discarded. Don't share your session string — it grants full access to the linked WhatsApp account.</p>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
